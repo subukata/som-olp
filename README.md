@@ -92,6 +92,24 @@ Run the Optuna-based hyperparameter search:
 python experiments/optuna_hyperparameter_search.py
 ```
 
+## Example results
+
+The following figures show the learned latent representations produced by `experiments/example.py`.
+
+Each figure shows the learned latent space on a 16×16 grid (`M=256`). Gray dots and lines represent the predefined latent-node grid, while colored points represent the learned continuous latent positions of the data points.
+
+### Iris
+![Iris result](experiments/results/som-olp_iris.png)
+
+### Wine
+![Wine result](experiments/results/som-olp_wine.png)
+
+### Breast Cancer
+![Breast Cancer result](experiments/results/som-olp_breast_cancer.png)
+
+### Digits
+![Digits result](experiments/results/som-olp_digits.png)
+
 ## Citation
 
 If you use this software, please cite the Zenodo record:
