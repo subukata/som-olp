@@ -14,12 +14,12 @@ from somolp import SOMOLP
 
 M_SIDE = 16
 
-# Best hyperparameters found by Optuna ((TW+CN)/2, k=5, m=16*16, StandardScaler)
+# Best hyperparameters found by Optuna ((TW+CN)/2, k=5, m=16*16, StandardScaler, pca_scale=2.0)
 DATASETS = [
-    ("iris",           load_iris,           dict(gamma=67.26,  lam=1.165,  pca_scale=1.86)),
-    ("wine",           load_wine,           dict(gamma=798.7,  lam=17.23,  pca_scale=0.12)),
-    ("breast_cancer",  load_breast_cancer,  dict(gamma=897.9,  lam=14.29,  pca_scale=2.16)),
-    ("digits",         load_digits,         dict(gamma=0.036,  lam=1.717,  pca_scale=2.23)),
+    ("iris",           load_iris,           dict(gamma=51.94,  lam=1.32)),
+    ("wine",           load_wine,           dict(gamma=961.4,  lam=21.14)),
+    ("breast_cancer",  load_breast_cancer,  dict(gamma=807.2,  lam=13.49)),
+    ("digits",         load_digits,         dict(gamma=5.53,   lam=2.79)),
 ]
 
 
@@ -40,7 +40,7 @@ def run(name, loader, params):
 
     model = SOMOLP(
         R, gamma=params["gamma"], lam=params["lam"],
-        max_iters=1000, tol=1e-4, pca_scale=params["pca_scale"],
+        max_iters=1000, tol=1e-4,
     ).fit(X)
     print(f"[{name} Grid {M_SIDE}x{M_SIDE}] n_iter={model.n_iter}  obj={model.history[-1]:.6f}")
 

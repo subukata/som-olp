@@ -25,9 +25,8 @@ R = np.column_stack([gx.ravel(), gy.ravel()])
 def objective(trial, X):
     gamma = trial.suggest_float("gamma", 0.001, 1000.0, log=True)
     lam = trial.suggest_float("lam", 0.001, 1000.0, log=True)
-    pca_scale = trial.suggest_float("pca_scale", 0.1, 5.0, log=True)
 
-    model = SOMOLP(R, gamma=gamma, lam=lam, max_iters=1000, tol=1e-4, pca_scale=pca_scale).fit(X)
+    model = SOMOLP(R, gamma=gamma, lam=lam, max_iters=1000, tol=1e-4).fit(X)
     tw = trustworthiness(X, model.V, n_neighbors=5)
     cn = trustworthiness(model.V, X, n_neighbors=5)
     return (tw + cn) / 2
