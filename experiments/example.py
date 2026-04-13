@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.collections import LineCollection
 from sklearn.datasets import load_iris, load_wine, load_breast_cancer, load_digits
 from sklearn.preprocessing import StandardScaler
@@ -15,7 +14,7 @@ from somolp import SOMOLP
 
 M_SIDE = 16
 
-# Best hyperparameters found by Optuna ((TW+CN)/2, k=5, m=16, StandardScaler)
+# Best hyperparameters found by Optuna ((TW+CN)/2, k=5, m=16*16, StandardScaler)
 DATASETS = [
     ("iris",           load_iris,           dict(gamma=67.26,  lam=1.165,  pca_scale=1.86)),
     ("wine",           load_wine,           dict(gamma=798.7,  lam=17.23,  pca_scale=0.12)),
@@ -45,19 +44,18 @@ def run(name, loader, params):
     ).fit(X)
     print(f"[{name} Grid {M_SIDE}x{M_SIDE}] n_iter={model.n_iter}  obj={model.history[-1]:.6f}")
 
-    save_path = Path(__file__).resolve().parent / "results" / f"som-olp_{name}.pdf"
+    save_path = Path(__file__).resolve().parent / "results" / f"som-olp_{name}.png"
     segments = grid_segments(model.R, M_SIDE)
 
-    with PdfPages(save_path) as pdf:
-        fig, ax = plt.subplots(figsize=(7, 6))
-        ax.add_collection(LineCollection(segments, colors="#cccccc", linewidths=0.4, zorder=1))
-        ax.scatter(model.R[:, 0], model.R[:, 1], s=8, c="#aaaaaa", zorder=2)
-        ax.scatter(model.V[:, 0], model.V[:, 1], s=12, c=y, cmap="tab10", vmin=0, vmax=9, zorder=3)
-        ax.set_title(f"{name} — Latent space (Grid {M_SIDE}x{M_SIDE}, M={M_SIDE*M_SIDE})")
-        ax.set_aspect("equal")
-        fig.tight_layout()
-        pdf.savefig(fig, bbox_inches="tight", dpi=300)
-        plt.close(fig)
+    fig, ax = plt.subplots(figsize=(7, 6))
+    ax.add_collection(LineCollection(segments, colors="#cccccc", linewidths=0.4, zorder=1))
+    ax.scatter(model.R[:, 0], model.R[:, 1], s=8, c="#aaaaaa", zorder=2)
+    ax.scatter(model.V[:, 0], model.V[:, 1], s=12, c=y, cmap="tab10", vmin=0, vmax=9, zorder=3)
+    ax.set_title(f"{name} — Latent space (Grid {M_SIDE}x{M_SIDE}, M={M_SIDE*M_SIDE})")
+    ax.set_aspect("equal")
+    fig.tight_layout()
+    fig.savefig(save_path, bbox_inches="tight", dpi=300)
+    plt.close(fig)
 
     print(f"Saved: {save_path}")
 
