@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as follows."
+title: "som-olp"
+type: software
+authors:
+  - family-names: "Ubukata"
+    given-names: "Seiki"
+    affiliation: "Osaka Metropolitan University"
+version: "1.0.0"
+date-released: 2026-04-13
+repository-code: "https://github.com/subukata/som-olp"
+url: "https://github.com/subukata/som-olp"
+license: "MIT"
+abstract: "Python implementation of Self-Organizing Maps with Optimized Latent Positions (SOM-OLP)."
