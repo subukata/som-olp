@@ -4,14 +4,14 @@ Python implementation of **Self-Organizing Maps with Optimized Latent Positions 
 
 ## Overview
 
-SOM-OLP is an objective-based topographic mapping method that introduces a continuous latent position for each data point. This repository provides a minimal implementation of the method together with simple experiment scripts.
+SOM-OLP learns prototypes and continuous latent positions for individual data points within a single objective-based framework. This repository provides a minimal implementation of the method together with simple experiment scripts.
 
 ### Key features
 
 - Based on a single objective function optimization problem
-- Convergence guaranteed by closed-form cyclic block coordinate descent (BCD)
-- Computational complexity is linear in both the number of data points and nodes
-- Encompasses entropy-regularized fuzzy c-means and k-means as special cases
+- Monotonic objective decrease under closed-form cyclic block updates
+- Per-iteration computational complexity is O(NM) without explicit node-node interactions
+- Relates to entropy-regularized fuzzy c-means and k-means in limiting or simplified settings
 
 ## Repository structure
 
@@ -39,7 +39,7 @@ cd som-olp
 pip install -r requirements.txt
 ```
 
-If you want to run the hyperparameter search script, install Optuna as well:
+Optuna is optional and required only for hyperparameter search:
 
 ```bash
 pip install optuna
@@ -47,7 +47,7 @@ pip install optuna
 
 ## Quick start
 
-A minimal example is shown below.
+A minimal example is shown below. The hyperparameters `gamma` and `lam` are dataset-dependent; the values here were tuned for Iris via Optuna (see `experiments/optuna_hyperparameter_search.py`).
 
 ```python
 import numpy as np
@@ -80,19 +80,13 @@ print("W (reference vectors, first 5) =\n", model.W[:5])
 
 ## Example scripts
 
-Run the example script:
+`experiments/example.py` runs SOM-OLP on Iris, Wine, Breast Cancer, and Digits (all from scikit-learn) using Optuna-tuned hyperparameters, and saves latent-space visualizations as PNG files to `experiments/results/`.
 
 ```bash
 python experiments/example.py
 ```
 
-This script runs SOM-OLP on several datasets and saves output figures to:
-
-```text
-experiments/results/
-```
-
-Run the Optuna-based hyperparameter search:
+`experiments/optuna_hyperparameter_search.py` searches for the best `gamma` and `lam` per dataset by maximizing the average of trustworthiness and continuity.
 
 ```bash
 python experiments/optuna_hyperparameter_search.py
@@ -121,6 +115,17 @@ Each figure shows the learned latent space on a 16×16 grid (`M=256`). Gray dots
 If you use this software, please cite the Zenodo record:
 
 - https://doi.org/10.5281/zenodo.19547951
+
+```bibtex
+@software{ubukata2026somolp,
+  author    = {Ubukata, Seiki},
+  title     = {som-olp},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.19547951},
+  url       = {https://github.com/subukata/som-olp}
+}
+```
 
 Citation information is also available in `CITATION.cff`.
 
