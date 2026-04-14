@@ -6,6 +6,13 @@ Python implementation of **Self-Organizing Maps with Optimized Latent Positions 
 
 SOM-OLP is an objective-based topographic mapping method that introduces a continuous latent position for each data point. This repository provides a minimal implementation of the method together with simple experiment scripts.
 
+### Key features
+
+- Based on a single objective function optimization problem
+- Convergence guaranteed by closed-form cyclic block coordinate descent (BCD)
+- Computational complexity is linear in both the number of data points and nodes
+- Encompasses entropy-regularized fuzzy c-means and k-means as special cases
+
 ## Repository structure
 
 ```text
@@ -59,17 +66,16 @@ R = np.column_stack([gx.ravel(), gy.ravel()])
 
 model = SOMOLP(
     R,
-    gamma=67.26,
-    lam=1.165,
+    gamma=51.94,
+    lam=1.32,
     max_iters=1000,
     tol=1e-4,
-    pca_scale=1.86,
 ).fit(X)
 
 print("n_iter =", model.n_iter)
 print("final objective =", model.history[-1])
-print("latent positions shape =", model.V.shape)
-print("reference vectors shape =", model.W.shape)
+print("V (latent positions, first 5) =\n", model.V[:5])
+print("W (reference vectors, first 5) =\n", model.W[:5])
 ```
 
 ## Example scripts
@@ -99,16 +105,16 @@ The following figures show the learned latent representations produced by `exper
 Each figure shows the learned latent space on a 16×16 grid (`M=256`). Gray dots and lines represent the predefined latent-node grid, while colored points represent the learned continuous latent positions of the data points.
 
 ### Iris
-![Iris result](experiments/results/som-olp_iris.png)
+<img src="experiments/results/som-olp_iris.png" width="400">
 
 ### Wine
-![Wine result](experiments/results/som-olp_wine.png)
+<img src="experiments/results/som-olp_wine.png" width="400">
 
 ### Breast Cancer
-![Breast Cancer result](experiments/results/som-olp_breast_cancer.png)
+<img src="experiments/results/som-olp_breast_cancer.png" width="400">
 
 ### Digits
-![Digits result](experiments/results/som-olp_digits.png)
+<img src="experiments/results/som-olp_digits.png" width="400">
 
 ## Citation
 
