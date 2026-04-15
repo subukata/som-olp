@@ -4,13 +4,13 @@ Python implementation of **Self-Organizing Maps with Optimized Latent Positions 
 
 ## Overview
 
-SOM-OLP learns prototypes and continuous latent positions for individual data points within a single objective-based framework. This repository provides a minimal implementation of the method together with simple experiment scripts.
+SOM-OLP is a variant of Self-Organizing Maps (SOM) that jointly learns reference vectors in data space and continuous latent positions in latent space for individual data points within a single objective-based framework. This repository provides a minimal implementation of the method together with simple experiment scripts.
 
 ### Key features
 
 - Based on a single objective function optimization problem
-- Monotonic objective decrease under closed-form cyclic block updates
-- Per-iteration computational complexity is O(NM) without explicit node-node interactions
+- Monotonically non-increasing objective under closed-form cyclic block updates
+- Per-iteration computational complexity is O(NM), where N is the number of data points and M is the number of nodes, without explicit node-node interactions
 - Relates to entropy-regularized fuzzy c-means and k-means in limiting or simplified settings
 
 ## Repository structure
