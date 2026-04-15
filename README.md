@@ -90,6 +90,13 @@ Each figure shows the learned latent space on a 16×16 grid (`M=256`). Gray dots
 ### Digits
 <img src="experiments/results/som-olp_digits.png" width="400">
 
+## MNIST example
+
+The animation below shows the evolution of the learned latent representation on MNIST.
+The model was tuned on 2,000 samples after normalization to [0, 1], and the final hyperparameters were then used to fit and visualize 70,000 samples.
+
+<img src="docs/som-olp_mnist_full_animation.gif" width="400">
+
 ## Citation
 
 If you use this software, please cite the Zenodo record:
