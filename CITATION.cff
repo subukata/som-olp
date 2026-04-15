@@ -6,7 +6,7 @@ authors:
   - family-names: "Ubukata"
     given-names: "Seiki"
     affiliation: "Osaka Metropolitan University"
-version: "1.0.0"
+version: "0.1.0"
 date-released: 2026-04-13
 repository-code: "https://github.com/subukata/som-olp"
 url: "https://github.com/subukata/som-olp"
