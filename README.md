@@ -1,37 +1,21 @@
 # SOM-OLP
 
-Python implementation of **Self-Organizing Maps with Optimized Latent Positions (SOM-OLP)**.
+Minimal Python implementation of **Self-Organizing Maps with Optimized Latent Positions (SOM-OLP)**.
 
 ## Overview
 
-SOM-OLP is an objective-based variant of Self-Organizing Maps (SOM) that jointly learns reference vectors in data space and continuous latent positions for individual data points. This repository provides a minimal implementation of the method together with simple experiment scripts.
+SOM-OLP is an objective-based SOM variant that jointly learns reference vectors and continuous latent positions for data points. This repository provides a minimal implementation with simple example scripts.
 
 ### Key features
 
-- Based on a single objective function optimization problem
-- Monotonically non-increasing objective under closed-form cyclic block updates
-- Per-iteration computational complexity is O(NM), where N is the number of data points and M is the number of nodes, without explicit node-node interactions
-- Relates to entropy-regularized fuzzy c-means and k-means in limiting or simplified settings
-
-## Repository structure
-
-```text
-som-olp/
-├── somolp.py
-├── requirements.txt
-├── CITATION.cff
-├── LICENSE
-└── experiments/
-    ├── example.py
-    ├── optuna_hyperparameter_search.py
-    └── results/
-```
-
-- `somolp.py`: minimal implementation of the `SOMOLP` class
-- `experiments/example.py`: example script for running SOM-OLP on several benchmark datasets
-- `experiments/optuna_hyperparameter_search.py`: Optuna-based hyperparameter search script
+- Single-objective formulation
+- Closed-form cyclic block updates with a monotonically non-increasing objective
+- O(NM) per iteration, where N is the number of data points and M is the number of nodes
+- Related to entropy-regularized fuzzy c-means and k-means in limiting cases
 
 ## Installation
+
+Clone this repository and install the required dependencies.
 
 ```bash
 git clone https://github.com/subukata/som-olp.git
@@ -39,7 +23,7 @@ cd som-olp
 pip install -r requirements.txt
 ```
 
-Optuna is optional and required only for hyperparameter search:
+Optuna is optional and required only for hyperparameter search.
 
 ```bash
 pip install optuna
@@ -47,7 +31,7 @@ pip install optuna
 
 ## Quick start
 
-A minimal example is shown below. The hyperparameters `gamma` and `lam` are dataset-dependent; the values here were tuned for Iris via Optuna (see `experiments/optuna_hyperparameter_search.py`).
+A minimal example is shown below. The hyperparameters `gamma` and `lam` are dataset-dependent; the values below were tuned for Iris via Optuna (see `experiments/optuna_hyperparameter_search.py`).
 
 ```python
 import numpy as np
@@ -59,11 +43,13 @@ from somolp import SOMOLP
 X, _ = load_iris(return_X_y=True)
 X = StandardScaler().fit_transform(X)
 
+# Create fixed node coordinates in the latent space
 m_side = 16
 t = np.linspace(-1, 1, m_side)
 gx, gy = np.meshgrid(t, t)
 R = np.column_stack([gx.ravel(), gy.ravel()])
 
+# Initialize and fit the SOM-OLP model
 model = SOMOLP(R, gamma=51.94, lam=1.32).fit(X)
 
 print("n_iter =", model.n_iter)
