@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as follows."
-title: "som-olp"
+message: "If you use SOM-OLP, please cite it as follows."
+title: "SOM-OLP"
 type: software
 authors:
   - family-names: "Ubukata"

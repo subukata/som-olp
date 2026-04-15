@@ -64,13 +64,7 @@ t = np.linspace(-1, 1, m_side)
 gx, gy = np.meshgrid(t, t)
 R = np.column_stack([gx.ravel(), gy.ravel()])
 
-model = SOMOLP(
-    R,
-    gamma=51.94,
-    lam=1.32,
-    max_iters=1000,
-    tol=1e-4,
-).fit(X)
+model = SOMOLP(R, gamma=51.94, lam=1.32).fit(X)
 
 print("n_iter =", model.n_iter)
 print("final objective =", model.history[-1])
@@ -119,7 +113,7 @@ If you use this software, please cite the Zenodo record:
 ```bibtex
 @software{ubukata2026somolp,
   author    = {Ubukata, Seiki},
-  title     = {som-olp},
+  title     = {{SOM-OLP}},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.19547951},
