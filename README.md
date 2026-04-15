@@ -1,10 +1,10 @@
-# som-olp
+# SOM-OLP
 
 Python implementation of **Self-Organizing Maps with Optimized Latent Positions (SOM-OLP)**.
 
 ## Overview
 
-SOM-OLP is a variant of Self-Organizing Maps (SOM) that jointly learns reference vectors in data space and continuous latent positions in latent space for individual data points within a single objective-based framework. This repository provides a minimal implementation of the method together with simple experiment scripts.
+SOM-OLP is an objective-based variant of Self-Organizing Maps (SOM) that jointly learns reference vectors in data space and continuous latent positions for individual data points. This repository provides a minimal implementation of the method together with simple experiment scripts.
 
 ### Key features
 
