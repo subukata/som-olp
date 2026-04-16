@@ -2,6 +2,10 @@
 
 Minimal Python implementation of **Self-Organizing Maps with Optimized Latent Positions (SOM-OLP)**.
 
+This implementation is based on the following paper:
+
+> S. Ubukata, A. Notsu, and K. Honda, "Self-Organizing Maps with Optimized Latent Positions," arXiv preprint arXiv:2604.13622, 2026. [[arXiv]](https://arxiv.org/abs/2604.13622)
+
 ## Overview
 
 SOM-OLP is an objective-based SOM variant that jointly learns reference vectors and continuous latent positions for data points. This repository provides a minimal implementation with simple example scripts.
@@ -99,12 +103,17 @@ The model was tuned on 2,000 samples after normalization to [0, 1], and the fina
 
 ## Citation
 
-If you use this software, please cite the Zenodo record:
-
-- https://doi.org/10.5281/zenodo.19547951
+If you use this software, please cite the following paper and software:
 
 ```bibtex
-@software{ubukata2026somolp,
+@article{ubukata2026somolp,
+  author  = {Ubukata, Seiki and Notsu, Akira and Honda, Katsuhiro},
+  title   = {Self-Organizing Maps with Optimized Latent Positions},
+  journal = {arXiv preprint arXiv:2604.13622},
+  year    = {2026}
+}
+
+@software{ubukata2026somolp_software,
   author    = {Ubukata, Seiki},
   title     = {{SOM-OLP}},
   year      = {2026},
